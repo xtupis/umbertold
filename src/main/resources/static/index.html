@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Поиск врачей</title>
+</head>
+<body>
+<h1>Выберите город и специализацию</h1>
+<form action="/search" method="get">
+    <label>Город:
+        <select name="city">
+            <option>Москва</option>
+            <option>Питер</option>
+            <option>Воронеж</option>
+        </select>
+    </label>
+    <label>Специальность:
+        <select name="speciality">
+            <option>terapevt</option>
+            <option>cardiolog</option>
+            <option>nevrolog</option>
+            <option>dentist</option>
+            <option>dermatolog</option>
+        </select>
+    </label>
+    <button type="submit">Поиск</button>
+</form>
+</body>
+</html>
