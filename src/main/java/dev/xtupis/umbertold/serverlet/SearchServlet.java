@@ -2,6 +2,7 @@ package dev.xtupis.umbertold.serverlet;
 
 import dev.xtupis.umbertold.doctor.DoctorFields;
 import dev.xtupis.umbertold.service.ParserService;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -21,27 +22,17 @@ public class SearchServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        // Получаем параметры из запроса
         String city = request.getParameter("city");
         String speciality = request.getParameter("speciality");
 
+        // Парсим данные
         List<DoctorFields> doctors = parserService.parse(city, speciality);
 
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            out.println("<html><body>");
-            out.println("<h1>Результаты поиска</h1>");
-            if (doctors.isEmpty()) {
-                out.println("<p>Врачи не найдены.</p>");
-            } else {
-                out.println("<ul>");
-                for (DoctorFields d : doctors) {
-                    out.printf("<li><b>%s</b> — %s — %s — <a href='%s'>Профиль</a></li>",
-                            d.getName(), d.getSpecialization(), d.getClinic(), d.getProfileUrl());
-                }
-                out.println("</ul>");
-            }
-            out.println("<a href='/index.html'>Назад</a>");
-            out.println("</body></html>");
-        }
+        // Добавляем список врачей в атрибут запроса
+        request.setAttribute("doctors", doctors);
+
+        // Перенаправляем на страницу результатов
+        request.getRequestDispatcher("/results.jsp").forward(request, response);
     }
 }

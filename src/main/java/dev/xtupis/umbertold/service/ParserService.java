@@ -29,7 +29,6 @@ public class ParserService {
                     .timeout(10_000)
                     .get();
 
-            // Получаем все карточки врачей
             Elements cards = document.select("div.b-doctor-card");
 
             for (Element card : cards.stream().limit(5).toList()) {
@@ -37,17 +36,14 @@ public class ParserService {
                 String spec = card.select("div.b-doctor-card__spec").text();
                 String clinic = card.select("div.b-doctor-card__lpu-info").text();
 
-                // Получаем ссылку на профиль и нормализуем
                 String profileUrl = card.select("a.b-doctor-card__name-link").attr("abs:href");
                 profileUrl = profileUrl.split("#")[0];
 
-                // Парсим рейтинг с профиля врача
                 String rating = parseDoctorRating(profileUrl);
 
                 DoctorFields doctor = new DoctorFields(name, spec, clinic, rating, profileUrl);
                 doctors.add(doctor);
 
-                // Выводим информацию в консоль
                 System.out.println("Doctor: " + doctor.getName());
                 System.out.println("Clinic: " + doctor.getClinic());
                 System.out.println("Rating: " + doctor.getRating());
@@ -69,7 +65,6 @@ public class ParserService {
                     .timeout(10_000)
                     .get();
 
-            // Извлекаем рейтинг
             Element ratingElement = profileDoc.selectFirst("div.text-h5.text--text.font-weight-medium.mr-2");
             if (ratingElement != null) {
                 return ratingElement.text().trim();
@@ -78,7 +73,7 @@ public class ParserService {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return "Нет рейтинга"; // на случай, если рейтинг не найден
+        return "Нет рейтинга";
     }
 
     private String buildUrl(String city, String speciality) {

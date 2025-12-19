@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Поиск врачей - Умбертольд</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            position: relative;
+        }
+
+        /* Контейнер для логотипов */
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            position: absolute;
+            top: -40px;  /* Сдвигаем немного выше */
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .logo-container img {
+            width: 40px;  /* Размер для обычных логотипов */
+            height: auto;
+            transition: all 0.3s ease;
+        }
+
+        .logo-container img.main-logo {
+            width: 60px;  /* Увеличиваем центральный логотип */
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 36px;
+        }
+
+        header p {
+            font-size: 18px;
+            margin-top: 10px;
+        }
+
+        .content {
+            padding: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .doctor-card {
+            border: 1px solid #ddd;
+            margin-bottom: 15px;
+            padding: 15px;
+            border-radius: 8px;
+            background-color: #fafafa;
+        }
+
+        .doctor-card h3 {
+            margin: 0;
+            font-size: 20px;
+            color: #333;
+        }
+
+        .doctor-card .specialization {
+            font-weight: bold;
+            color: #666;
+        }
+
+        .doctor-card .clinic {
+            font-style: italic;
+            color: #777;
+        }
+
+        .doctor-card .rating {
+            margin-top: 10px;
+            color: #ff9800;
+        }
+
+        .doctor-card a {
+            display: inline-block;
+            margin-top: 10px;
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .doctor-card a:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            margin-top: 30px;
+        }
+
+        footer a {
+            color: #ff9800;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-top: 20px;
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+
+        .back-button:hover {
+            background-color: #0056b3;
+        }
+
+    </style>
+</head>
+<body>
+
+<header>
+    <!-- Вереница логотипов -->
+    <div class="logo-container">
+        <img src="/images/gluttony.png" alt="Logo 1">
+        <img src="logo2.png" alt="Logo 2">
+        <img src="logo3.png" alt="Logo 3">
+        <img src="logo4.png" alt="Logo 4" class="main-logo">  <!-- Центральное изображение -->
+        <img src="logo5.png" alt="Logo 5">
+        <img src="logo6.png" alt="Logo 6">
+        <img src="logo7.png" alt="Logo 7">
+    </div>
+
+    <h1>Умбертольд</h1>
+    <p>Поиск врачей по всему миру</p>
+</header>
+
+<div class="content">
+    <h2>Результаты поиска</h2>
+    <div>
+        <a href="/index.html" class="back-button">Назад</a>
+    </div>
+
+
+
+    <div>
+        <ul>
+            <th:block th:if="${doctors.isEmpty()}">
+                <p>Врачи не найдены.</p>
+            </th:block>
+
+            <th:block th:each="doctor : ${doctors}">
+                <div class="doctor-card">
+                    <h3 th:text="${doctor.name}"></h3>
+                    <p class="specialization" th:text="${doctor.specialization}"></p>
+                    <p class="clinic" th:text="${doctor.clinic}"></p>
+                    <p class="rating" th:text="${doctor.rating}"></p>
+                    <a th:href="${doctor.profileUrl}" target="_blank">Перейти в профиль</a>
+                </div>
+            </th:block>
+        </ul>
+    </div>
+</div>
+
+<footer>
+
+    <p>&copy; 2025 Умбертольд. Все права защищены.</p>
+    <p><a href="https://www.example.com">Политика конфиденциальности</a> | <a href="https://www.example.com">Условия использования</a></p>
+</footer>
+
+</body>
+</html>
