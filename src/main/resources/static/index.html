@@ -2,61 +2,230 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
+    <title>Умбертольд — поиск врачей</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Поиск врачей</title>
+
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            background-color: #f4f4f9;
+        * {
+            box-sizing: border-box;
         }
-        h1 {
+
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: linear-gradient(180deg, #eef2f7, #ffffff);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            color: #333;
+        }
+
+        header {
+            background: #2c3e50;
+            color: white;
+            padding: 40px 20px;
             text-align: center;
         }
-        .form-container {
-            width: 100%;
-            max-width: 400px;
-            margin: 0 auto;
-            background-color: white;
-            padding: 20px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
+
+        header h1 {
+            margin: 0;
+            font-size: 38px;
+            letter-spacing: 1px;
         }
-        .form-container select, .form-container button {
+
+        header p {
+            margin-top: 12px;
+            font-size: 17px;
+            opacity: 0.9;
+        }
+
+        /* ===== Информационный блок ===== */
+        .info-section {
+            padding: 50px 20px;
+            background: #ffffff;
+        }
+
+        .info-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .info-box {
+            background: #f9fafc;
+            border-radius: 14px;
+            padding: 30px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .info-box h2 {
+            margin-top: 0;
+            font-size: 22px;
+            color: #2c3e50;
+        }
+
+        .info-box ul {
+            padding-left: 18px;
+            margin: 15px 0 0;
+        }
+
+        .info-box li {
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+
+        /* ===== Блок поиска ===== */
+        main {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            padding: 40px 20px;
+            background: #eef2f7;
+        }
+
+        .search-card {
             width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            font-size: 1rem;
-            border-radius: 5px;
-            border: 1px solid #ddd;
+            max-width: 420px;
+            background: white;
+            border-radius: 14px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        .search-card h2 {
+            text-align: center;
+            margin-top: 0;
+        }
+
+        .search-card p {
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 25px;
+        }
+
+        label {
+            font-size: 14px;
+            font-weight: 600;
+            margin-top: 15px;
+            display: block;
+        }
+
+        select {
+            width: 100%;
+            padding: 10px 12px;
+            margin-top: 6px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            font-size: 15px;
+            background-color: #f9f9f9;
+        }
+
+        select:focus {
+            outline: none;
+            border-color: #3498db;
+            background-color: #fff;
+        }
+
+        button {
+            width: 100%;
+            margin-top: 25px;
+            padding: 12px;
+            border-radius: 8px;
+            border: none;
+            background: #3498db;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        button:hover {
+            background: #2f89c9;
+        }
+
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 14px;
+            font-size: 13px;
+            opacity: 0.9;
+        }
+
+        @media (max-width: 800px) {
+            .info-container {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
 
-<h1>Поиск врача</h1>
+<header>
+    <h1>Умбертольд</h1>
+    <p>Интеллектуальный подбор врачей для медицинских учреждений</p>
+</header>
 
-<div class="form-container">
-    <form action="/search" method="get">
-        <label for="city">Город:</label>
-        <select id="city" name="city">
-            <option value="Москва">Москва</option>
-            <option value="Питер">Питер</option>
-            <option value="Воронеж">Воронеж</option>
-        </select>
+<section class="info-section">
+    <div class="info-container">
 
-        <label for="speciality">Специальность:</label>
-        <select id="speciality" name="speciality">
-            <option value="Терапевт">Терапевт</option>
-            <option value="Кардиолог">Кардиолог</option>
-            <option value="Невролог">Невролог</option>
-            <option value="Хирург">Хирург</option>
-            <option value="Офтальмолог">Офтальмолог</option>
-        </select>
+        <div class="info-box">
+            <h2>Проблемы подбора медицинского персонала</h2>
+            <ul>
+                <li>Поиск квалифицированных врачей занимает недели и месяцы</li>
+                <li>Кандидаты часто не соответствуют заявленным требованиям</li>
+                <li>Отсутствует единая платформа для быстрого сравнения специалистов</li>
+                <li>Ручной отбор требует больших временных и кадровых ресурсов</li>
+            </ul>
+        </div>
 
-        <button type="submit">Поиск</button>
-    </form>
-</div>
+        <div class="info-box">
+            <h2>Почему именно Умбертольд</h2>
+            <ul>
+                <li>Собираем актуальные данные о врачах из открытых источников</li>
+                <li>Позволяем быстро находить специалистов по городу и направлению</li>
+                <li>Фокусируемся на рейтингах, опыте и клиниках</li>
+                <li>Минимизируем время между поиском и принятием решения</li>
+            </ul>
+        </div>
+
+    </div>
+</section>
+
+<main>
+    <div class="search-card">
+        <h2>Найти врача</h2>
+        <p>Выберите город и специализацию — мы подберём лучших кандидатов</p>
+
+        <form action="/search" method="get">
+            <label for="city">Город</label>
+            <select id="city" name="city">
+                <option value="Москва">Москва</option>
+                <option value="Питер">Санкт-Петербург</option>
+                <option value="Воронеж">Воронеж</option>
+            </select>
+
+            <label for="speciality">Специальность</label>
+            <select id="speciality" name="speciality">
+                <option value="Терапевт">Терапевт</option>
+                <option value="Кардиолог">Кардиолог</option>
+                <option value="Невролог">Невролог</option>
+                <option value="Хирург">Хирург</option>
+                <option value="Офтальмолог">Офтальмолог</option>
+            </select>
+
+            <button type="submit">🔍 Найти врачей</button>
+        </form>
+    </div>
+</main>
+
+<footer>
+    © 2025 Умбертольд — сервис подбора врачей
+</footer>
 
 </body>
 </html>

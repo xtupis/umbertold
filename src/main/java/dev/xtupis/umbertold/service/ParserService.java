@@ -79,7 +79,7 @@ public class ParserService {
     private String buildUrl(String city, String speciality) {
         Map<String, String> cityMap = new HashMap<>();
         cityMap.put("Москва", "moskva");
-        cityMap.put("Питер", "sankt-peterburg");
+        cityMap.put("Санкт-Петербург", "spb");
         cityMap.put("Воронеж", "voronezh");
 
         Map<String, String> specialityMap = new HashMap<>();
